@@ -47,11 +47,17 @@ const Feed = () => {
       }, 500)
     )
   }
-
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt")
-    const data = await response.json()
-    setAllPosts(data)
+    try {
+      const response = await fetch("/api/prompt")
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      setAllPosts(data)
+    } catch (error) {
+      console.log("Error fetching posts: ", error)
+    }
   }
 
   const handleTagClick = (tagName) => {
