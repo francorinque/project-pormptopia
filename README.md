@@ -1,7 +1,17 @@
-[] Implement Search
-  -Search by prompt
-  - Search by tag
-  -Search by username
+# Proyecto de Exploración de PROMPTS para AIs
 
-[] Implement Click on tag
-[] Implement view other profiles
+Bienvenido/a a este proyecto cuyo objetivo es compartir y explorar PROMPTS para Inteligencias Artificiales.
+
+## Funcionalidades Implementadas
+
+- **Búsqueda:**
+  - Buscar por prompt
+  - Buscar por etiqueta
+  - Buscar por nombre de usuario
+
+- **Interactividad:**
+  - Hacer clic en una etiqueta para explorar más
+  - Ver perfiles de otros usuarios
+
+
+
