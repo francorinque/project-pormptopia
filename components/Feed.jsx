@@ -6,7 +6,7 @@ import PromptCard from "./PromptCard"
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post) => (
+      {data?.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
@@ -17,8 +17,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
   )
 }
 
-const Feed = () => {
-  const [allPosts, setAllPosts] = useState([])
+const Feed = ({ data }) => {
+  const [allPosts, setAllPosts] = useState(data)
 
   // Search states
   const [searchText, setSearchText] = useState("")
@@ -47,9 +47,20 @@ const Feed = () => {
       }, 500)
     )
   }
+
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName)
+
+    //filter prompts
+    const searchResult = filterPrompts(tagName)
+    setSearchedResults(searchResult)
+  }
+
   const fetchPosts = async () => {
     try {
-      const response = await fetch("/api/prompt")
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL || "/api/prompt"
+      )
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -58,14 +69,6 @@ const Feed = () => {
     } catch (error) {
       console.log("Error fetching posts: ", error)
     }
-  }
-
-  const handleTagClick = (tagName) => {
-    setSearchText(tagName)
-
-    //filter prompts
-    const searchResult = filterPrompts(tagName)
-    setSearchedResults(searchResult)
   }
 
   useEffect(() => {
